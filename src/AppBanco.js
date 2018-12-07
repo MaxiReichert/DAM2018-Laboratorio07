@@ -20,8 +20,8 @@ export default class AppBanco extends Component{
 	
 	hacerPlazoFijo(){
 		if(this.state.correo=='') ToastAndroid.show('Ingrese su Correo Electronico', ToastAndroid.LONG);
-		else if(this.state.cuit=='00-00000000-0') ToastAndroid.show('Ingrese su Cuit', ToastAndroid.LONG);
-		else if(this.state.capitalInicial==0) ToastAndroid.show('Ingrese un monto', ToastAndroid.LONG);
+		else if(this.state.cuit=='00-00000000-0' || this.state.cuit=='') ToastAndroid.show('Ingrese su Cuit', ToastAndroid.LONG);
+		else if(this.state.capitalInicial==0 || isNaN(this.state.capitalInicial)) ToastAndroid.show('Ingrese un monto', ToastAndroid.LONG);
 		else if(this.state.acepto==false) ToastAndroid.show('Debe aceptar las condiciones', ToastAndroid.LONG);
 		else {
 			this.state.capitalFinal= this.state.capitalInicial+calcularInteres(this.state.capitalInicial, this.state.dias);
@@ -130,6 +130,7 @@ const styles = StyleSheet.create({
 		color: '#333333',
 		marginTop:5,
 	},
+	
 });
 
 function calcularInteres(capital, dias){
